@@ -8,29 +8,33 @@ editor: visual
 
 This repository contains supplementary material for the paper "A new test for assessing the covariate effect in ROC curves" (link to ArXiv). The code for the implementation of the test proposed there is provided along with an illustrative example.
 
-::: {.callout-note collapse="true" icon="false"}
-#### Abstract of the paper
+<details>
 
-The ROC curve is a statistical tool that analyses the accuracy of a diagnostic test in which a variable is used to decide whether an individual is healthy or not. Along with that diagnostic variable it is usual to have information of some other covariates. In some situations it is advisable to incorporate that information into the study, as the performance of the ROC curves can be affected by them. Using the covariate-adjusted, the covariate-specific or the pooled ROC curves we discuss how to decide if we can exclude the covariates from our study or not, and the implications this may have in further analyses of the ROC curve. A new test for comparing the covariate-adjusted and the pooled ROC curve is proposed, and the problem is illustrated by analysing a real database.
-:::
+<summary>**Abstract of the paper**</summary>
 
-::: {.callout-note collapse="true" icon="false"}
-#### Main objective of the paper
+> The ROC curve is a statistical tool that analyses the accuracy of a diagnostic test in which a variable is used to decide whether an individual is healthy or not. Along with that diagnostic variable it is usual to have information of some other covariates. In some situations it is advisable to incorporate that information into the study, as the performance of the ROC curves can be affected by them. Using the covariate-adjusted, the covariate-specific or the pooled ROC curves we discuss how to decide if we can exclude the covariates from our study or not, and the implications this may have in further analyses of the ROC curve. A new test for comparing the covariate-adjusted and the pooled ROC curve is proposed, and the problem is illustrated by analysing a real database.
 
-Given the ***ROC curve***
+</details>
 
-$$ROC(p) = 1- F(G^{-1}(1-p)), \;  p\in (0,1),$$
+<details>
 
-and the ***covariate-adjusted (AROC) curve***
+<summary>**Main objective of the paper**</summary>
 
-$$AROC(p) = P(Y^F>  G^{-1}(1-p\mid X^F)), \; p \in (0,1),$$
+> Given the ***ROC curve***
+>
+> $$ROC(p) = 1- F(G^{-1}(1-p)), \;  p\in (0,1),$$
+>
+> and the ***covariate-adjusted (AROC) curve***
+>
+> $$AROC(p) = P(Y^F>  G^{-1}(1-p\mid X^F)), \; p \in (0,1),$$
+>
+> our objective is to test
+>
+> $$H_0: AROC(p)=ROC(p), \; p \in (0,1),$$
+>
+> versus the general alternative $H_1: H_0$ is not true.
 
-our objective is to test
-
-$$H_0: AROC(p)=ROC(p), \; p \in (0,1),$$
-
-versus the general alternative $H_1: H_0$ is not true.
-:::
+</details>
 
 The functions will be part of the **`ROCxComp`** package, currently under construction.
 

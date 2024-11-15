@@ -1,0 +1,228 @@
+---
+title: "Comparing ROC and AROC curves from the same marker: a practical example"
+format: html
+editor: visual
+---
+
+This is a practical example to show how to use the functions provided in the [**functions.R**](functions.R) script. Its part of the supplementary material for the paper "A new test for assessing the covariate effect in ROC curves".
+
+## First steps
+
+### Packages
+
+First we load the packages that will be needed. They are used either to load the data or to draw graphical representations. They are not actually needed to perform the test.
+
+```{r}
+# library(refreg) # for loading the data
+library(viridis) # for color selection
+library(hdrcde) # for estimating the conditional densities
+library(ggplot2) #for the graphical representations
+library(ggExtra) #for the graphical representations
+library(kableExtra) # for presenting the tables
+```
+
+### Loading the functions
+
+We load the functions that will be used here. Make sure that the functions.R file is in the working directory.
+
+```{r message=FALSE, warning=FALSE}
+source("functions.R")
+```
+
+### The data
+
+We use the **`aegis`** dataset contained in the `refreg` package (note that the `refreg` needs to be installed previously).
+
+```{r message=FALSE, warning=FALSE}
+data("aegis", package = "refreg")
+
+head(aegis)
+```
+
+This dataset contains information for 1516 patients suspected of having diabetes. Of the 7 variables that it includes, we will be focusing on these three:
+
+-   **`dm`**: Diabetes mellitus indicator (no, and yes). The healthy/diseased indicator.
+
+-   **`fpg`**: the diagnostic marker (fasting plasma glucose levels in mg/dL).
+
+-   **`age`**: the covariate that will be considered.
+
+Then, the data that will be exploited will be:
+
+```{r}
+Y = aegis$fpg
+YF = aegis$fpg[aegis$dm == "yes"]
+YG = aegis$fpg[aegis$dm == "no"]
+sampleY = list(YF,YG)
+
+X = aegis$age
+XF = aegis$age[aegis$dm == "yes"]
+XG = aegis$age[aegis$dm == "no"]
+sampleX = list(XF,XG)
+```
+
+## Exploratory analysis
+
+Before performing the test, let us explore the data in hand.
+
+First, we check the sample sizes of the diseased and the healthy populations:
+
+```{r}
+nameG="No-diabetes"
+nameF="Diabetes"
+table(aegis$dm)
+```
+
+Exploration of the diagnostic marker:
+
+```{r}
+nameY="fpg"
+nameYG=paste(nameY,"(",nameG,")")
+nameYF=paste(nameY,"(",nameF,")")
+
+Y.sum=rbind(summary(Y), summary(YF), summary(YG))
+rownames(Y.sum)=c(nameY,nameYF,nameYG)
+kable(Y.sum)
+```
+
+Exploration of the covariate:
+
+```{r}
+nameX="age"
+nameXG=paste(nameX,"(",nameG,")")
+nameXF=paste(nameX,"(",nameF,")")
+
+X.sum=rbind(summary(X), summary(XF), summary(XG))
+rownames(X.sum)=c(nameX,nameXF,nameXG)
+kable(X.sum)
+```
+
+### Graphical representation:
+
+Scatterplot with marginal densities:
+
+
+```{r warning=FALSE}
+q = ggplot(aegis) +
+  geom_point(aes(x = age, y = fpg, color = dm), alpha = 0.6, shape = 16) +
+  scale_color_manual(labels=c(nameG, nameF),
+                     values = c("no" = viridis(5)[2], "yes"= viridis(4)[3]))+
+  theme_minimal() +
+  scale_fill_discrete(labels=c(nameG, nameF))+
+  theme(legend.position = "bottom") + 
+  labs(x = "age", y = "fpg") 
+ggMarginal(q, type = "densigram", groupColour = TRUE, groupFill = TRUE, alpha = 0.3)
+```
+
+Conditional densities F/G:
+
+```{r}
+plot.densities.FG(XF,YF, XG,YG, x.name=nameX, y.name = nameY, 
+                  col1 = viridis(5,alpha=0.4)[2],col2 = viridis(4,alpha=0.4)[3])
+```
+
+## Testing AROC vs ROC for the same marker
+
+In this section we perform the test $$H_0: AROC(p)=ROC(p), \; p \in (0,1),$$ versus the general alternative $H_1: H_0$ is not true.
+
+The seed 1234 was set at the begining of all the tests to make the results reproducible. 
+
+### Basic example 
+
+We first perform the test for 200 bootstrap replications and for an even division of the sample for the ROC and the AROC curves estimation:
+
+
+```{r tests, include=FALSE}
+set.seed(1234)
+results.1 = Test.ROCAROC(sampleY, sampleX, nboots=200, nr = 2)
+set.seed(1234)
+results.1.1000 = Test.ROCAROC(sampleY, sampleX, nboots=1000, nr = 2)
+set.seed(1234)
+results.2 = Test.ROCAROC(sampleY, sampleX, nboots=200, nr = 3)
+set.seed(1234)
+results.3 = Test.ROCAROC(sampleY, sampleX, nboots=200, nr = 4)
+```
+
+```{r eval=FALSE}
+set.seed(1234)
+results.1 = Test.ROCAROC(sampleY, sampleX, nboots=200, nr = 2)
+```
+
+The test statistics values and the p-values obtained are:
+
+```{r}
+results.1$statistics
+results.1$pvalues
+```
+
+
+These results show no indications that null hypothesis is false. Thus, we could conclude that both curves are equal.
+
+### Modifying the arguments 
+
+Let us see what happens if we modify some of the arguments. First we will increment the bootstrap replications from 200 to 1000.
+```{r eval=FALSE}
+set.seed(1234)
+results.1.1000 = Test.ROCAROC(sampleY, sampleX, nboots=1000, nr = 2)
+```
+
+Then, (using again 200 bootstrap iterations), we try two ways of splitting the sample unevenly (with nr = 3 and with nr = 4).
+
+```{r eval=FALSE}
+set.seed(1234)
+results.2 = Test.ROCAROC(sampleY, sampleX, nboots=200, nr = 3)
+set.seed(1234)
+results.3 = Test.ROCAROC(sampleY, sampleX, nboots=200, nr = 4)
+```
+
+We summarize the results in this table:
+
+```{r}
+t.stat = rbind(results.1$statistics, results.1.1000$statistics, results.2$statistics, results.3$statistics)
+t.pval = rbind(results.1$pvalues, results.1.1000$pvalues, results.2$pvalues, results.3$pvalues)
+rownames(t.stat) = rownames(t.pval)= c("nboots = 200,  nr = 2", "nboots = 1000, nr = 2", "nboots = 200,  nr = 3", "nboots = 200,  nr = 4")
+kable(round(cbind(t.stat, t.pval), digits = 3))
+```
+
+
+The values of the test statistics and the p-values are very similar to the values obtained for fewer bootstrap iterations.
+
+We also see that the conclusions are consistent for the different splitting of the sample.
+
+## Representation of the ROC and the AROC curves
+
+Taking advantage that the Test.ROCAROC function computes the estimation for both the ROC and the AROC curves, we can represent them:
+
+```{r}
+plot(results.1$p,results.1$ROC,type="l",col = "orange",lwd=2,lty=1,xlab="p",ylab="ROC(p)",xlim=c(0,1),ylim=c(0,1),axes = FALSE, asp = 1)
+axis(1)
+axis(2)
+points(results.1$p,results.1$AROC,type="l", col="darkred",lwd=2, lty=1)
+legend("bottomright",legend=c("ROC (pooled)", "AROC"),lwd=2,lty=1, col=c("orange", "darkred"),bty = "n")
+
+```
+
+At the sight of the graphics it seems reasonable that no differences were detected among the two curves.
+
+We can also compare the estimations obtained with the different splitting of the sample:
+
+```{r, fig.asp=1}
+plot(results.1$p,results.1$ROC,type="l",col = "orange",lwd=2,lty=1,xlab="p",ylab="ROC(p)",xlim=c(0,1),ylim=c(0,1),axes = FALSE, asp = 1)
+axis(1)
+axis(2)
+points(results.2$p, results.2$ROC, type = "l", col = "orange", lty = 2, lwd = 2)
+points(results.3$p, results.3$ROC, type = "l", col = "orange", lty = 3, lwd = 2)
+points(results.1$p, results.1$AROC, type = "l", col = "brown", lwd = 2)
+points(results.2$p, results.2$AROC, type = "l", col = "brown", lty = 2, lwd = 2)
+points(results.3$p, results.3$AROC, type = "l", col = "brown", lty = 3, lwd = 2)
+points(results.1$p,results.1$AROC,type="l", col="darkred",lwd=2, lty=1)
+
+legend("bottomright",legend=c("ROC (pooled)", "AROC"),lwd=2,lty=1, col=c("orange", "darkred"),bty = "n")
+
+
+```
+
+## References
+
+Fanjul-Hevia, A., Pardo-Fernández, J.C., González-Manteiga, W. (2024) A new test for assessing the covariate effect in ROC curves. ArXive preprint \[link\].
+
