@@ -4,7 +4,7 @@ This repository contains supplementary material for the paper "A new test for as
 
 <details>
 
-<summary>**Abstract of the paper**</summary>
+<summary> Abstract of the paper </summary>
 
 > The ROC curve is a statistical tool that analyses the accuracy of a diagnostic test in which a variable is used to decide whether an individual is healthy or not. Along with that diagnostic variable it is usual to have information of some other covariates. In some situations it is advisable to incorporate that information into the study, as the performance of the ROC curves can be affected by them. Using the covariate-adjusted, the covariate-specific or the pooled ROC curves we discuss how to decide if we can exclude the covariates from our study or not, and the implications this may have in further analyses of the ROC curve. A new test for comparing the covariate-adjusted and the pooled ROC curve is proposed, and the problem is illustrated by analysing a real database.
 
@@ -12,7 +12,7 @@ This repository contains supplementary material for the paper "A new test for as
 
 <details>
 
-<summary>**Main objective of the paper**</summary>
+<summary> Main objective of the paper </summary>
 
 > Given the ***ROC curve***
 >
@@ -36,7 +36,7 @@ The functions will be part of the **`ROCxComp`** package, currently under constr
 
 -   [**functions.R**](functions.R): an R script containing the functions needed to run the test.
 
--   [**Example.qmd**](Example.qmd) and [**Example.html**](Example.html): a quarto document in which a dataset concerning potentially diabetic patients is analysed using the methodology here proposed.\
+-   [**Example.qmd**](Example.qmd) and [**Example.html**](https://rawcdn.githack.com/arisfanjul/CovEffectinROCcurves/df46f74544d677696394d19e4e3f223a631d0d67/Example.html): a quarto document in which a dataset concerning potentially diabetic patients is analysed using the methodology here proposed.\
     The dataset, **`aegis`**, is provided by the [refreg package](https://cran.r-project.org/web/packages/refreg/index.html).
 
 -   [**example.R**](example.R): an R script with the code to replicate the example provided above.
