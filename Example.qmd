@@ -1,6 +1,8 @@
 ---
 title: "Comparing ROC and AROC curves from the same marker: a practical example"
-format: html
+format: 
+  html:
+    embed-resources: true
 editor: visual
 ---
 
@@ -193,7 +195,7 @@ We also see that the conclusions are consistent for the different splitting of t
 
 Taking advantage that the Test.ROCAROC function computes the estimation for both the ROC and the AROC curves, we can represent them:
 
-```{r}
+```{r, fig.asp=1}
 plot(results.1$p,results.1$ROC,type="l",col = "orange",lwd=2,lty=1,xlab="p",ylab="ROC(p)",xlim=c(0,1),ylim=c(0,1),axes = FALSE, asp = 1)
 axis(1)
 axis(2)

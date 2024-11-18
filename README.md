@@ -1,9 +1,3 @@
----
-title: "CovEffectinROCcurves"
-format: html
-editor: visual
----
-
 ## A new test for assessing the covariate effect in ROC curves <img src="fig/logo_ROCxComp.png" align="right" width="120" height="139"/>
 
 This repository contains supplementary material for the paper "A new test for assessing the covariate effect in ROC curves" (link to ArXiv). The code for the implementation of the test proposed there is provided along with an illustrative example.
