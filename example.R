@@ -13,10 +13,12 @@
 
 # Packages ------------------------------------------------------------------
 
+# library(refreg)
 library(viridis) # for color selection
 library(hdrcde) # for estimating the conditional densities
-library(kableExtra)
-# library(refreg)
+library(ggplot2) #for the graphical representations
+library(ggExtra) #for the graphical representations
+library(kableExtra) # for presenting the tables
 
 # Loading functions from the functions.R script
 source("functions.R")
