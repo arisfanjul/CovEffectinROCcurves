@@ -64,7 +64,7 @@ nameXG=paste(nameX,"(",nameG,")")
 nameXF=paste(nameX,"(",nameF,")")
 
 X.sum=rbind(summary(X), summary(XF), summary(XG))
-rownames(X.sum)=c(nameX.1,nameXF,nameXG)
+rownames(X.sum)=c(nameX,nameXF,nameXG)
 kable(X.sum)
 
 
