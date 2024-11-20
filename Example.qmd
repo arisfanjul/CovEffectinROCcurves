@@ -14,7 +14,7 @@ This is a practical example to show how to use the functions provided in the [**
 
 First we load the packages that will be needed. They are used either to load the data or to draw graphical representations. They are not actually needed to perform the test.
 
-```{r}
+```{r, message=FALSE}
 # library(refreg) # for loading the data
 library(viridis) # for color selection
 library(hdrcde) # for estimating the conditional densities
