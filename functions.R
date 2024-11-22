@@ -167,7 +167,12 @@ Test.ROCAROC=function(sampleY, sampleX, nboots=200, nr = 2){
   sigmaG.est.XF = sqrt(NW(XF.aroc,XG.aroc,(YG.aroc-muG.est)^2,gG))
   sss=sort(residG)[floor(m.aroc*(1-p))+1]
   yyy=(YF.aroc-muG.est.XF)/sigmaG.est.XF
-  AROC0=rowMeans(outer(sss,yyy,FUN = "<"))
+  
+  if(sum(is.na(yyy))>0){
+    warning("The sample size n^F and/or n^G is too small. Some NaN appeared when using the ND estimator. Those values were omited, the power of the test may be compromised.")
+    
+  }
+  AROC0=rowMeans(outer(sss,yyy,FUN = "<"), na.rm = TRUE)
   
   # ROC ******************************
   ROC0= 1- ecdf(YF.roc)(sort(YG.roc)[floor(m.roc*(1-p))+1])
@@ -206,7 +211,7 @@ Test.ROCAROC=function(sampleY, sampleX, nboots=200, nr = 2){
     sigmaG.est.XF.boots = sqrt(NW(XF.aroc,XG.aroc,(YG.b.aroc-muG.est.boots)^2,gG.boots))
     sss.b=sort(residG.boots)[floor(m.aroc*(1-p))+1]
     yyy.b=(YF.b.aroc-muG.est.XF.boots)/sigmaG.est.XF.boots
-    AROCb=rowMeans(outer(sss.b,yyy.b,FUN = "<"))
+    AROCb=rowMeans(outer(sss.b,yyy.b,FUN = "<"),na.rm = TRUE)
     
     # ROC bootstrap 
     
