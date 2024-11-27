@@ -3248,33 +3248,27 @@ window.Quarto = {
 <p>First we load the packages that will be needed. They are used either to load the data or to draw graphical representations. They are not actually needed to perform the test.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(refreg) # for loading the data</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis) <span class="co"># for color selection</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Cargando paquete requerido: viridisLite</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hdrcde) <span class="co"># for estimating the conditional densities</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>This is hdrcde 3.4</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#for the graphical representations</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggExtra) <span class="co">#for the graphical representations</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># for presenting the tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis) <span class="co"># for color selection</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hdrcde) <span class="co"># for estimating the conditional densities</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#for the graphical representations</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggExtra) <span class="co">#for the graphical representations</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># for presenting the tables</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="loading-the-functions" class="level3">
 <h3 class="anchored" data-anchor-id="loading-the-functions">Loading the functions</h3>
 <p>We load the functions that will be used here. Make sure that the functions.R file is in the working directory.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions.R&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;functions.R&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-data" class="level3">
 <h3 class="anchored" data-anchor-id="the-data">The data</h3>
 <p>We use the <strong><code>aegis</code></strong> dataset contained in the <code>refreg</code> package (note that the <code>refreg</code> needs to be installed previously).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;aegis&quot;</span>, <span class="at">package =</span> <span class="st">&quot;refreg&quot;</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aegis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;aegis&quot;</span>, <span class="at">package =</span> <span class="st">&quot;refreg&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aegis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id gender age  dm fpg hba1c fru
 1  1   male  47  no 101   6.0 222
@@ -3293,15 +3287,15 @@ window.Quarto = {
 </ul>
 <p>Then, the data that will be exploited will be:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">=</span> aegis<span class="sc">$</span>fpg</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>YF <span class="ot">=</span> aegis<span class="sc">$</span>fpg[aegis<span class="sc">$</span>dm <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>]</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>YG <span class="ot">=</span> aegis<span class="sc">$</span>fpg[aegis<span class="sc">$</span>dm <span class="sc">==</span> <span class="st">&quot;no&quot;</span>]</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>sampleY <span class="ot">=</span> <span class="fu">list</span>(YF,YG)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> aegis<span class="sc">$</span>age</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>XF <span class="ot">=</span> aegis<span class="sc">$</span>age[aegis<span class="sc">$</span>dm <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>]</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>XG <span class="ot">=</span> aegis<span class="sc">$</span>age[aegis<span class="sc">$</span>dm <span class="sc">==</span> <span class="st">&quot;no&quot;</span>]</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>sampleX <span class="ot">=</span> <span class="fu">list</span>(XF,XG)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">=</span> aegis<span class="sc">$</span>fpg</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>YF <span class="ot">=</span> aegis<span class="sc">$</span>fpg[aegis<span class="sc">$</span>dm <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>YG <span class="ot">=</span> aegis<span class="sc">$</span>fpg[aegis<span class="sc">$</span>dm <span class="sc">==</span> <span class="st">&quot;no&quot;</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>sampleY <span class="ot">=</span> <span class="fu">list</span>(YF,YG)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> aegis<span class="sc">$</span>age</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>XF <span class="ot">=</span> aegis<span class="sc">$</span>age[aegis<span class="sc">$</span>dm <span class="sc">==</span> <span class="st">&quot;yes&quot;</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>XG <span class="ot">=</span> aegis<span class="sc">$</span>age[aegis<span class="sc">$</span>dm <span class="sc">==</span> <span class="st">&quot;no&quot;</span>]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>sampleX <span class="ot">=</span> <span class="fu">list</span>(XF,XG)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -3310,9 +3304,9 @@ window.Quarto = {
 <p>Before performing the test, let us explore the data in hand.</p>
 <p>First, we check the sample sizes of the diseased and the healthy populations:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>nameG<span class="ot">=</span><span class="st">&quot;No-diabetes&quot;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>nameF<span class="ot">=</span><span class="st">&quot;Diabetes&quot;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(aegis<span class="sc">$</span>dm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nameG<span class="ot">=</span><span class="st">&quot;No-diabetes&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>nameF<span class="ot">=</span><span class="st">&quot;Diabetes&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(aegis<span class="sc">$</span>dm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
   no  yes 
@@ -3321,13 +3315,13 @@ window.Quarto = {
 </div>
 <p>Exploration of the diagnostic marker:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>nameY<span class="ot">=</span><span class="st">&quot;fpg&quot;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>nameYG<span class="ot">=</span><span class="fu">paste</span>(nameY,<span class="st">&quot;(&quot;</span>,nameG,<span class="st">&quot;)&quot;</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>nameYF<span class="ot">=</span><span class="fu">paste</span>(nameY,<span class="st">&quot;(&quot;</span>,nameF,<span class="st">&quot;)&quot;</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>Y.sum<span class="ot">=</span><span class="fu">rbind</span>(<span class="fu">summary</span>(Y), <span class="fu">summary</span>(YF), <span class="fu">summary</span>(YG))</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(Y.sum)<span class="ot">=</span><span class="fu">c</span>(nameY,nameYF,nameYG)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Y.sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nameY<span class="ot">=</span><span class="st">&quot;fpg&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>nameYG<span class="ot">=</span><span class="fu">paste</span>(nameY,<span class="st">&quot;(&quot;</span>,nameG,<span class="st">&quot;)&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>nameYF<span class="ot">=</span><span class="fu">paste</span>(nameY,<span class="st">&quot;(&quot;</span>,nameF,<span class="st">&quot;)&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>Y.sum<span class="ot">=</span><span class="fu">rbind</span>(<span class="fu">summary</span>(Y), <span class="fu">summary</span>(YF), <span class="fu">summary</span>(YG))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(Y.sum)<span class="ot">=</span><span class="fu">c</span>(nameY,nameYF,nameYG)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(Y.sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -3375,13 +3369,13 @@ window.Quarto = {
 </div>
 <p>Exploration of the covariate:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nameX<span class="ot">=</span><span class="st">&quot;age&quot;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>nameXG<span class="ot">=</span><span class="fu">paste</span>(nameX,<span class="st">&quot;(&quot;</span>,nameG,<span class="st">&quot;)&quot;</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>nameXF<span class="ot">=</span><span class="fu">paste</span>(nameX,<span class="st">&quot;(&quot;</span>,nameF,<span class="st">&quot;)&quot;</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>X.sum<span class="ot">=</span><span class="fu">rbind</span>(<span class="fu">summary</span>(X), <span class="fu">summary</span>(XF), <span class="fu">summary</span>(XG))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(X.sum)<span class="ot">=</span><span class="fu">c</span>(nameX,nameXF,nameXG)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(X.sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>nameX<span class="ot">=</span><span class="st">&quot;age&quot;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>nameXG<span class="ot">=</span><span class="fu">paste</span>(nameX,<span class="st">&quot;(&quot;</span>,nameG,<span class="st">&quot;)&quot;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>nameXF<span class="ot">=</span><span class="fu">paste</span>(nameX,<span class="st">&quot;(&quot;</span>,nameF,<span class="st">&quot;)&quot;</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>X.sum<span class="ot">=</span><span class="fu">rbind</span>(<span class="fu">summary</span>(X), <span class="fu">summary</span>(XF), <span class="fu">summary</span>(XG))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(X.sum)<span class="ot">=</span><span class="fu">c</span>(nameX,nameXF,nameXG)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(X.sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <thead>
@@ -3431,15 +3425,15 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="graphical-representation">Graphical representation:</h3>
 <p>Scatterplot with marginal densities:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">=</span> <span class="fu">ggplot</span>(aegis) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> fpg, <span class="at">color =</span> dm), <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">shape =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">labels=</span><span class="fu">c</span>(nameG, nameF),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;no&quot;</span> <span class="ot">=</span> <span class="fu">viridis</span>(<span class="dv">5</span>)[<span class="dv">2</span>], <span class="st">&quot;yes&quot;</span><span class="ot">=</span> <span class="fu">viridis</span>(<span class="dv">4</span>)[<span class="dv">3</span>]))<span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(nameG, nameF))<span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;fpg&quot;</span>) </span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggMarginal</span>(q, <span class="at">type =</span> <span class="st">&quot;densigram&quot;</span>, <span class="at">groupColour =</span> <span class="cn">TRUE</span>, <span class="at">groupFill =</span> <span class="cn">TRUE</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">=</span> <span class="fu">ggplot</span>(aegis) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> fpg, <span class="at">color =</span> dm), <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">shape =</span> <span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">labels=</span><span class="fu">c</span>(nameG, nameF),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;no&quot;</span> <span class="ot">=</span> <span class="fu">viridis</span>(<span class="dv">5</span>)[<span class="dv">2</span>], <span class="st">&quot;yes&quot;</span><span class="ot">=</span> <span class="fu">viridis</span>(<span class="dv">4</span>)[<span class="dv">3</span>]))<span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(nameG, nameF))<span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;age&quot;</span>, <span class="at">y =</span> <span class="st">&quot;fpg&quot;</span>) </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggMarginal</span>(q, <span class="at">type =</span> <span class="st">&quot;densigram&quot;</span>, <span class="at">groupColour =</span> <span class="cn">TRUE</span>, <span class="at">groupFill =</span> <span class="cn">TRUE</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3450,8 +3444,8 @@ window.Quarto = {
 </div>
 <p>Conditional densities F/G:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.densities.FG</span>(XF,YF, XG,YG, <span class="at">x.name=</span>nameX, <span class="at">y.name =</span> nameY, </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col1 =</span> <span class="fu">viridis</span>(<span class="dv">5</span>,<span class="at">alpha=</span><span class="fl">0.4</span>)[<span class="dv">2</span>],<span class="at">col2 =</span> <span class="fu">viridis</span>(<span class="dv">4</span>,<span class="at">alpha=</span><span class="fl">0.4</span>)[<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.densities.FG</span>(XF,YF, XG,YG, <span class="at">x.name=</span>nameX, <span class="at">y.name =</span> nameY, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">col1 =</span> <span class="fu">viridis</span>(<span class="dv">5</span>,<span class="at">alpha=</span><span class="fl">0.4</span>)[<span class="dv">2</span>],<span class="at">col2 =</span> <span class="fu">viridis</span>(<span class="dv">4</span>,<span class="at">alpha=</span><span class="fl">0.4</span>)[<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3470,17 +3464,17 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="basic-example">Basic example</h3>
 <p>We first perform the test for 200 bootstrap replications and for an even division of the sample for the ROC and the AROC curves estimation:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>results<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">Test.ROCAROC</span>(sampleY, sampleX, <span class="at">nboots=</span><span class="dv">200</span>, <span class="at">nr =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>results<span class="fl">.1</span> <span class="ot">=</span> <span class="fu">Test.ROCAROC</span>(sampleY, sampleX, <span class="at">nboots=</span><span class="dv">200</span>, <span class="at">nr =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The test statistics values and the p-values obtained are:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>results<span class="fl">.1</span><span class="sc">$</span>statistics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>results<span class="fl">.1</span><span class="sc">$</span>statistics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          T1          T2       TKS
 1 0.04764318 0.003256029 0.1849691</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>results<span class="fl">.1</span><span class="sc">$</span>pvalues</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>results<span class="fl">.1</span><span class="sc">$</span>pvalues</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  pvalue.T1 pvalue.T2 pvalue.TKS
 1      0.16     0.155      0.695</code></pre>
@@ -3492,22 +3486,22 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="modifying-the-arguments">Modifying the arguments</h3>
 <p>Let us see what happens if we modify some of the arguments. First we will increment the bootstrap replications from 200 to 1000.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>results.<span class="fl">1.1000</span> <span class="ot">=</span> <span class="fu">Test.ROCAROC</span>(sampleY, sampleX, <span class="at">nboots=</span><span class="dv">1000</span>, <span class="at">nr =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>results.<span class="fl">1.1000</span> <span class="ot">=</span> <span class="fu">Test.ROCAROC</span>(sampleY, sampleX, <span class="at">nboots=</span><span class="dv">1000</span>, <span class="at">nr =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then, (using again 200 bootstrap iterations), we try two ways of splitting the sample unevenly (with nr = 3 and with nr = 4).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>results<span class="fl">.2</span> <span class="ot">=</span> <span class="fu">Test.ROCAROC</span>(sampleY, sampleX, <span class="at">nboots=</span><span class="dv">200</span>, <span class="at">nr =</span> <span class="dv">3</span>)</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>results<span class="fl">.3</span> <span class="ot">=</span> <span class="fu">Test.ROCAROC</span>(sampleY, sampleX, <span class="at">nboots=</span><span class="dv">200</span>, <span class="at">nr =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>results<span class="fl">.2</span> <span class="ot">=</span> <span class="fu">Test.ROCAROC</span>(sampleY, sampleX, <span class="at">nboots=</span><span class="dv">200</span>, <span class="at">nr =</span> <span class="dv">3</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>results<span class="fl">.3</span> <span class="ot">=</span> <span class="fu">Test.ROCAROC</span>(sampleY, sampleX, <span class="at">nboots=</span><span class="dv">200</span>, <span class="at">nr =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We summarize the results in this table:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>t.stat <span class="ot">=</span> <span class="fu">rbind</span>(results<span class="fl">.1</span><span class="sc">$</span>statistics, results.<span class="fl">1.1000</span><span class="sc">$</span>statistics, results<span class="fl">.2</span><span class="sc">$</span>statistics, results<span class="fl">.3</span><span class="sc">$</span>statistics)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>t.pval <span class="ot">=</span> <span class="fu">rbind</span>(results<span class="fl">.1</span><span class="sc">$</span>pvalues, results.<span class="fl">1.1000</span><span class="sc">$</span>pvalues, results<span class="fl">.2</span><span class="sc">$</span>pvalues, results<span class="fl">.3</span><span class="sc">$</span>pvalues)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(t.stat) <span class="ot">=</span> <span class="fu">rownames</span>(t.pval)<span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;nboots = 200,  nr = 2&quot;</span>, <span class="st">&quot;nboots = 1000, nr = 2&quot;</span>, <span class="st">&quot;nboots = 200,  nr = 3&quot;</span>, <span class="st">&quot;nboots = 200,  nr = 4&quot;</span>)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">round</span>(<span class="fu">cbind</span>(t.stat, t.pval), <span class="at">digits =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>t.stat <span class="ot">=</span> <span class="fu">rbind</span>(results<span class="fl">.1</span><span class="sc">$</span>statistics, results.<span class="fl">1.1000</span><span class="sc">$</span>statistics, results<span class="fl">.2</span><span class="sc">$</span>statistics, results<span class="fl">.3</span><span class="sc">$</span>statistics)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>t.pval <span class="ot">=</span> <span class="fu">rbind</span>(results<span class="fl">.1</span><span class="sc">$</span>pvalues, results.<span class="fl">1.1000</span><span class="sc">$</span>pvalues, results<span class="fl">.2</span><span class="sc">$</span>pvalues, results<span class="fl">.3</span><span class="sc">$</span>pvalues)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(t.stat) <span class="ot">=</span> <span class="fu">rownames</span>(t.pval)<span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;nboots = 200,  nr = 2&quot;</span>, <span class="st">&quot;nboots = 1000, nr = 2&quot;</span>, <span class="st">&quot;nboots = 200,  nr = 3&quot;</span>, <span class="st">&quot;nboots = 200,  nr = 4&quot;</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">round</span>(<span class="fu">cbind</span>(t.stat, t.pval), <span class="at">digits =</span> <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
@@ -3579,11 +3573,11 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="representation-of-the-roc-and-the-aroc-curves">Representation of the ROC and the AROC curves</h2>
 <p>Taking advantage that the Test.ROCAROC function computes the estimation for both the ROC and the AROC curves, we can represent them:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(results<span class="fl">.1</span><span class="sc">$</span>p,results<span class="fl">.1</span><span class="sc">$</span>ROC,<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">col =</span> <span class="st">&quot;orange&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">1</span>,<span class="at">xlab=</span><span class="st">&quot;p&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;ROC(p)&quot;</span>,<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">asp =</span> <span class="dv">1</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.1</span><span class="sc">$</span>p,results<span class="fl">.1</span><span class="sc">$</span>AROC,<span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">col=</span><span class="st">&quot;darkred&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">1</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>,<span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;ROC (pooled)&quot;</span>, <span class="st">&quot;AROC&quot;</span>),<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;darkred&quot;</span>),<span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(results<span class="fl">.1</span><span class="sc">$</span>p,results<span class="fl">.1</span><span class="sc">$</span>ROC,<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">col =</span> <span class="st">&quot;orange&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">1</span>,<span class="at">xlab=</span><span class="st">&quot;p&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;ROC(p)&quot;</span>,<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">asp =</span> <span class="dv">1</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.1</span><span class="sc">$</span>p,results<span class="fl">.1</span><span class="sc">$</span>AROC,<span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">col=</span><span class="st">&quot;darkred&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">1</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>,<span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;ROC (pooled)&quot;</span>, <span class="st">&quot;AROC&quot;</span>),<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;darkred&quot;</span>),<span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3595,17 +3589,17 @@ window.Quarto = {
 <p>At the sight of the graphics it seems reasonable that no differences were detected among the two curves.</p>
 <p>We can also compare the estimations obtained with the different splitting of the sample:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(results<span class="fl">.1</span><span class="sc">$</span>p,results<span class="fl">.1</span><span class="sc">$</span>ROC,<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">col =</span> <span class="st">&quot;orange&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">1</span>,<span class="at">xlab=</span><span class="st">&quot;p&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;ROC(p)&quot;</span>,<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">asp =</span> <span class="dv">1</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.2</span><span class="sc">$</span>p, results<span class="fl">.2</span><span class="sc">$</span>ROC, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.3</span><span class="sc">$</span>p, results<span class="fl">.3</span><span class="sc">$</span>ROC, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.1</span><span class="sc">$</span>p, results<span class="fl">.1</span><span class="sc">$</span>AROC, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;brown&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.2</span><span class="sc">$</span>p, results<span class="fl">.2</span><span class="sc">$</span>AROC, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;brown&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.3</span><span class="sc">$</span>p, results<span class="fl">.3</span><span class="sc">$</span>AROC, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;brown&quot;</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.1</span><span class="sc">$</span>p,results<span class="fl">.1</span><span class="sc">$</span>AROC,<span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">col=</span><span class="st">&quot;darkred&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">1</span>)</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>,<span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;ROC (pooled)&quot;</span>, <span class="st">&quot;AROC&quot;</span>),<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;darkred&quot;</span>),<span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(results<span class="fl">.1</span><span class="sc">$</span>p,results<span class="fl">.1</span><span class="sc">$</span>ROC,<span class="at">type=</span><span class="st">&quot;l&quot;</span>,<span class="at">col =</span> <span class="st">&quot;orange&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">1</span>,<span class="at">xlab=</span><span class="st">&quot;p&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;ROC(p)&quot;</span>,<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">asp =</span> <span class="dv">1</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.2</span><span class="sc">$</span>p, results<span class="fl">.2</span><span class="sc">$</span>ROC, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.3</span><span class="sc">$</span>p, results<span class="fl">.3</span><span class="sc">$</span>ROC, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.1</span><span class="sc">$</span>p, results<span class="fl">.1</span><span class="sc">$</span>AROC, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;brown&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.2</span><span class="sc">$</span>p, results<span class="fl">.2</span><span class="sc">$</span>AROC, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;brown&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.3</span><span class="sc">$</span>p, results<span class="fl">.3</span><span class="sc">$</span>AROC, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;brown&quot;</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(results<span class="fl">.1</span><span class="sc">$</span>p,results<span class="fl">.1</span><span class="sc">$</span>AROC,<span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">col=</span><span class="st">&quot;darkred&quot;</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">1</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>,<span class="at">legend=</span><span class="fu">c</span>(<span class="st">&quot;ROC (pooled)&quot;</span>, <span class="st">&quot;AROC&quot;</span>),<span class="at">lwd=</span><span class="dv">2</span>,<span class="at">lty=</span><span class="dv">1</span>, <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;darkred&quot;</span>),<span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3617,7 +3611,7 @@ window.Quarto = {
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<p>Fanjul-Hevia, A., Pardo-Fernández, J.C., González-Manteiga, W. (2024) A new test for assessing the covariate effect in ROC curves. ArXive preprint [link].</p>
+<p>Fanjul-Hevia, A., Pardo-Fernández, J.C., González-Manteiga, W. (2024) A new test for assessing the covariate effect in ROC curves. ArXiv preprint <a href="https://arxiv.org/abs/2411.17464">Link</a>.</p>
 </section>
 
 </main>

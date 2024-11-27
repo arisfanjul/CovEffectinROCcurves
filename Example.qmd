@@ -103,7 +103,6 @@ kable(X.sum)
 
 Scatterplot with marginal densities:
 
-
 ```{r warning=FALSE}
 q = ggplot(aegis) +
   geom_point(aes(x = age, y = fpg, color = dm), alpha = 0.6, shape = 16) +
@@ -127,12 +126,11 @@ plot.densities.FG(XF,YF, XG,YG, x.name=nameX, y.name = nameY,
 
 In this section we perform the test $$H_0: AROC(p)=ROC(p), \; p \in (0,1),$$ versus the general alternative $H_1: H_0$ is not true.
 
-The seed 1234 was set at the begining of all the tests to make the results reproducible. 
+The seed 1234 was set at the begining of all the tests to make the results reproducible.
 
-### Basic example 
+### Basic example
 
 We first perform the test for 200 bootstrap replications and for an even division of the sample for the ROC and the AROC curves estimation:
-
 
 ```{r tests, include=FALSE}
 set.seed(1234)
@@ -157,12 +155,12 @@ results.1$statistics
 results.1$pvalues
 ```
 
-
 These results show no indications that null hypothesis is false. Thus, we could conclude that both curves are equal.
 
-### Modifying the arguments 
+### Modifying the arguments
 
 Let us see what happens if we modify some of the arguments. First we will increment the bootstrap replications from 200 to 1000.
+
 ```{r eval=FALSE}
 set.seed(1234)
 results.1.1000 = Test.ROCAROC(sampleY, sampleX, nboots=1000, nr = 2)
@@ -185,7 +183,6 @@ t.pval = rbind(results.1$pvalues, results.1.1000$pvalues, results.2$pvalues, res
 rownames(t.stat) = rownames(t.pval)= c("nboots = 200,  nr = 2", "nboots = 1000, nr = 2", "nboots = 200,  nr = 3", "nboots = 200,  nr = 4")
 kable(round(cbind(t.stat, t.pval), digits = 3))
 ```
-
 
 The values of the test statistics and the p-values are very similar to the values obtained for fewer bootstrap iterations.
 
@@ -226,5 +223,4 @@ legend("bottomright",legend=c("ROC (pooled)", "AROC"),lwd=2,lty=1, col=c("orange
 
 ## References
 
-Fanjul-Hevia, A., Pardo-Fernández, J.C., González-Manteiga, W. (2024) A new test for assessing the covariate effect in ROC curves. ArXive preprint \[link\].
-
+Fanjul-Hevia, A., Pardo-Fernández, J.C., González-Manteiga, W. (2024) A new test for assessing the covariate effect in ROC curves. ArXiv preprint [Link](https://arxiv.org/abs/2411.17464).

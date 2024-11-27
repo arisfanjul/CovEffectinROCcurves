@@ -84,4 +84,4 @@ The output of this function is a list with 5 items. The first three provides us 
 
 ### References
 
-Fanjul-Hevia, A., Pardo-Fernández, J.C., González-Manteiga, W. (2024) A new test for assessing the covariate effect in ROC curves. ArXive preprint \[link\].
+Fanjul-Hevia, A., Pardo-Fernández, J.C., González-Manteiga, W. (2024) A new test for assessing the covariate effect in ROC curves. arXiv preprint arXiv:2411.17464.  [Link](https://arxiv.org/abs/2411.17464).
